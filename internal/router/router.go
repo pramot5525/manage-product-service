@@ -1,7 +1,7 @@
 package router
 
 import (
-	"prm-product/internal/handler"
+	"manage-product-service/internal/handler"
 
 	"github.com/gofiber/fiber/v2"
 	swagger "github.com/gofiber/swagger"
@@ -17,8 +17,8 @@ func NewRouter(productHandler *handler.ProductHandler) *fiber.App {
 		URL: "/docs/openapi.yaml",
 	}))
 
-	app.Post("/products/create", productHandler.CreateProduct)
-	app.Patch("/products/update/:id", productHandler.UpdateProduct)
+	app.Post("/product", productHandler.CreateProduct)
+	app.Patch("/product/:id", productHandler.UpdateProduct)
 
 	return app
 }

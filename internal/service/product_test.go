@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	"prm-product/internal/model"
-	repositorymocks "prm-product/internal/repository/mocks"
+	"manage-product-service/internal/model"
+	repositorymocks "manage-product-service/internal/repository/mocks"
 
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"

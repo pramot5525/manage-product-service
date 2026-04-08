@@ -2,12 +2,12 @@ openapi: 3.0.3
 info:
   title: PRM Product API
   version: 1.0.0
-  description: OpenAPI specification for prm-product service.
+  description: OpenAPI specification for manage-product-service service.
 servers:
   - url: http://localhost:8080
     description: Local development
 paths:
-  /products/create:
+  /product:
     post:
       tags:
         - Product
@@ -18,40 +18,54 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProductRequest'
+              $ref: '#/components/schemas/ProductRequest'
       responses:
         '201':
           description: Product created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateProductResponse'
+                $ref: '#/components/schemas/APIResponse'
               example:
-                message: product created successfully
-                id: 1
+                successful: true
+                error_code: ""
+                data:
+                  id: 1
+                  name: iPhone 15
+                  description: Smartphone
+                  sale_price: 899.99
+                  price: 999.99
         '400':
-          description: Invalid request body
+          description: Invalid request body or validation error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              example:
-                error: invalid request body
+                $ref: '#/components/schemas/APIResponse'
+              examples:
+                invalidRequestBody:
+                  value:
+                    successful: false
+                    error_code: invalid_request_body
+                validationError:
+                  value:
+                    successful: false
+                    error_code: validation_error
         '500':
           description: Failed to create product
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/APIResponse'
               example:
-                error: failed to create product
+                successful: false
+                error_code: failed_to_create_product
 
-  /products/update/{id}:
+  /product/{id}:
     patch:
       tags:
         - Product
       summary: Partially update product
-      description: Only provided fields are updated. Omitted fields are left unchanged. `description` and `sale_price` may be sent as `null` to clear their values.
+      description: Only provided fields are updated. Omitted fields are left unchanged. `description` and `sale_price` may be sent as `null` to clear values.
       operationId: updateProduct
       parameters:
         - in: path
@@ -73,45 +87,58 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/APIResponse'
               example:
-                id: 1
-                name: iPhone 15 Pro
-                description: Updated description
-                sale_price: 849.99
-                price: 949.99
+                successful: true
+                error_code: ""
         '400':
           description: Invalid request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/APIResponse'
               examples:
                 invalidBody:
                   value:
-                    error: invalid request body
+                    successful: false
+                    error_code: invalid_request_body
                 invalidId:
                   value:
-                    error: invalid id format
-        '404':
-          description: Product not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              example:
-                error: product not found
+                    successful: false
+                    error_code: invalid_id
+                validationError:
+                  value:
+                    successful: false
+                    error_code: validation_error
         '500':
           description: Failed to update product
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/APIResponse'
               example:
-                error: failed to update product
+                successful: false
+                error_code: failed_to_update_product
 
 components:
   schemas:
+    APIResponse:
+      type: object
+      properties:
+        successful:
+          type: boolean
+          example: true
+        error_code:
+          type: string
+          example: ""
+        data:
+          allOf:
+            - $ref: '#/components/schemas/Product'
+          nullable: true
+      required:
+        - successful
+        - error_code
+
     Product:
       type: object
       properties:
@@ -148,7 +175,7 @@ components:
         - name
         - price
 
-    CreateProductRequest:
+    ProductRequest:
       type: object
       properties:
         name:
@@ -190,36 +217,10 @@ components:
           type: number
           format: double
           example: 949.99
-      description: Send only fields that need to be updated.
-
-    MessageResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: product updated successfully
-      required:
-        - message
-
-    CreateProductResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: product created successfully
-        id:
-          type: integer
-          format: int64
-          example: 1
-      required:
-        - message
-        - id
-
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          example: product not found
-      required:
-        - error
+      additionalProperties: false
+      description: |
+        Partial update payload.
+        - Omitted fields are not updated
+        - description: null clears description
+        - sale_price: null clears sale_price
+        - name and price do not accept null

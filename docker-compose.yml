@@ -1,5 +1,7 @@
+name: manage-product-service
 services:
   app:
+    container_name: manage-product-service-app
     build: .
     depends_on:
       - postgres
@@ -11,6 +13,7 @@ services:
       - .:/app
     command: air -c .air.toml
   postgres:
+    container_name: manage-product-service-postgres
     image: postgres:latest
     env_file:
       - .env

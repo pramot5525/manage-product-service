@@ -5,7 +5,7 @@
 package mocks
 
 import (
-	"prm-product/internal/model"
+	"manage-product-service/internal/model"
 
 	mock "github.com/stretchr/testify/mock"
 )

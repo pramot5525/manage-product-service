@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"testing"
 
-	"prm-product/internal/model"
+	"manage-product-service/internal/model"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/stretchr/testify/require"

@@ -8,8 +8,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"prm-product/internal/model"
-	servicemocks "prm-product/internal/service/mocks"
+	"manage-product-service/internal/model"
+	servicemocks "manage-product-service/internal/service/mocks"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/stretchr/testify/mock"

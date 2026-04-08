@@ -1,8 +1,8 @@
 package service
 
 import (
-	"prm-product/internal/model"
-	"prm-product/internal/repository"
+	"manage-product-service/internal/model"
+	"manage-product-service/internal/repository"
 )
 
 type ProductService interface {

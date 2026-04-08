@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"log"
 
-	"prm-product/internal/config"
-	"prm-product/internal/database"
-	"prm-product/internal/handler"
-	"prm-product/internal/repository"
-	"prm-product/internal/router"
-	"prm-product/internal/service"
+	"manage-product-service/internal/config"
+	"manage-product-service/internal/database"
+	"manage-product-service/internal/handler"
+	"manage-product-service/internal/repository"
+	"manage-product-service/internal/router"
+	"manage-product-service/internal/service"
 )
 
 func main() {

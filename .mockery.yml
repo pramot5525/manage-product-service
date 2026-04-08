@@ -4,7 +4,7 @@ generate: true
 log-level: info
 template: testify
 packages:
-  prm-product/internal/repository:
+  manage-product-service/internal/repository:
     config:
       dir: internal/repository/mocks
       filename: ProductRepository.go
@@ -12,7 +12,7 @@ packages:
       structname: ProductRepository
     interfaces:
       ProductRepository: {}
-  prm-product/internal/service:
+  manage-product-service/internal/service:
     config:
       dir: internal/service/mocks
       filename: ProductService.go

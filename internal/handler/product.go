@@ -2,8 +2,8 @@ package handler
 
 import (
 	"encoding/json"
-	"prm-product/internal/model"
-	"prm-product/internal/service"
+	"manage-product-service/internal/model"
+	"manage-product-service/internal/service"
 	"strconv"
 
 	"github.com/go-playground/validator/v10"

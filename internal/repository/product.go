@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"prm-product/internal/model"
+	"manage-product-service/internal/model"
 
 	"gorm.io/gorm"
 )

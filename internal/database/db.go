@@ -3,8 +3,8 @@ package database
 import (
 	"fmt"
 
-	"prm-product/internal/config"
-	"prm-product/internal/model"
+	"manage-product-service/internal/config"
+	"manage-product-service/internal/model"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
