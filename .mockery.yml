@@ -1,0 +1,22 @@
+force-file-write: true
+formatter: goimports
+generate: true
+log-level: info
+template: testify
+packages:
+  prm-product/internal/repository:
+    config:
+      dir: internal/repository/mocks
+      filename: ProductRepository.go
+      pkgname: mocks
+      structname: ProductRepository
+    interfaces:
+      ProductRepository: {}
+  prm-product/internal/service:
+    config:
+      dir: internal/service/mocks
+      filename: ProductService.go
+      pkgname: mocks
+      structname: ProductService
+    interfaces:
+      ProductService: {}
